@@ -47,14 +47,14 @@ The project includes a Streamlit frontend and a FastAPI backend to provide real-
 ```text
 Hotel-Booking-Cancellation-Prediction/
 │
+├── train.py
 ├── app.py
 ├── streamlit_app.py
-├── train.py
 ├── requirements.txt
 ├── cancellation_distribution.png
 ├── confusion_matrix.png
 ├── README.md
-└── .gitignore
+└── .gitignoregit status
 ```
 
 The trained model file (`hotel_bookings_pipeline.pkl`) is generated locally by running `train.py`. It is not included in this repository.
