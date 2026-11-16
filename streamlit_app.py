@@ -96,9 +96,15 @@ if st.button("Predict Cancellation"):
         "total_of_special_requests": total_of_special_requests
     }
     try:
+        API_URL = st.secrets.get(
+        "API_URL",
+        "http://127.0.0.1:8000"
+        )
+
         response = requests.post(
-            "http://127.0.0.1:8000/predict",
-            json={"data":data}
+        f"{API_URL.rstrip('/')}/predict",
+        json={"data": data},
+        timeout=30
         )
 
         if response.status_code == 200:

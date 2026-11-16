@@ -6,3 +6,4 @@ numpy==2.3.5
 scikit-learn==1.7.2
 joblib==1.5.2
 requests==2.32.5
+xgboost==3.4.1
