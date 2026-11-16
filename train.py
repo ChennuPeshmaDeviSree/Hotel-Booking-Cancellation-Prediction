@@ -83,10 +83,6 @@ for col in numeric_cols:
     })
 outlier_df = pd.DataFrame(outlier_summary)
 print("Outlier Detection Summary:")
-display(outlier_df.sort_values(
-    by="Outlier Count",
-    ascending=False
-))
 
 # 6. Split Features and Target
 X = df.drop("is_canceled", axis=1)
@@ -131,11 +127,11 @@ preprocessor = ColumnTransformer(transformers=[
 model = Pipeline(steps=[
     ("preprocessor", preprocessor),
     ("classifier", RandomForestClassifier(
-        n_estimators=100,
-        random_state=42,
-        n_jobs=-1,
-        class_weight="balanced"
-    ))
+    n_estimators=100,
+    random_state=42,
+    n_jobs=-1,
+    class_weight="balanced"
+))
 ])
 
 # 13. Train Model
