@@ -96,10 +96,12 @@ if st.button("Predict Cancellation"):
         "total_of_special_requests": total_of_special_requests
     }
     try:
-        API_URL = st.secrets.get(
+       
+    API_URL = st.secrets.get(
         "API_URL",
-        "http://127.0.0.1:8000"
-        )
+        "https://hotel-booking-cancellation-prediction-1-ouze.onrender.com"
+    )
+
 
         response = requests.post(
         f"{API_URL.rstrip('/')}/predict",
