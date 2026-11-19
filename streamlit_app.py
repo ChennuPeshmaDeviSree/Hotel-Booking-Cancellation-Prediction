@@ -62,6 +62,7 @@ required_car_parking_spaces = st.number_input("Required Car Parking Spaces", min
 
 total_of_special_requests = st.number_input("Total Special Requests", min_value=0, value=0)
 
+
 # Prediction Button
 if st.button("Predict Cancellation"):
     data = {
@@ -95,25 +96,27 @@ if st.button("Predict Cancellation"):
         "required_car_parking_spaces": required_car_parking_spaces,
         "total_of_special_requests": total_of_special_requests
     }
-    
-try:
-    response = requests.post(
-        "https://hotel-booking-cancellation-prediction-xvfq.onrender.com/predict",
-        json={"data": data}
-    )
 
-    if response.status_code == 200:
-        result = response.json()
+    try:
+        response = requests.post(
+            "https://hotel-booking-cancellation-prediction-xvfq.onrender.com/predict",
+            json={"data": data}
+        )
 
-        if result["prediction"] == 1:
-            st.error("⚠️ Booking is predicted to be CANCELLED")
+        if response.status_code == 200:
+            result = response.json()
+
+            if result["prediction"] == 1:
+                st.error("⚠️ Booking is predicted to be CANCELLED")
+            else:
+                st.success("✅ Booking is predicted NOT to be CANCELLED")
+
+            st.metric("Cancellation Probability", f"{result['probability']:.2%}")
+
         else:
-            st.success("✅ Booking is predicted NOT to be CANCELLED")
+            st.error(f"API Error: {response.text}")
 
-        st.metric("Cancellation Probability", f"{result['probability']:.2%}")
+    except requests.exceptions.ConnectionError:
+        st.error("FastAPI server is not running.")
 
-    else:
-        st.error(f"API Error: {response.text}")
-
-except requests.exceptions.ConnectionError:
     st.error("FastAPI server is not running.")
