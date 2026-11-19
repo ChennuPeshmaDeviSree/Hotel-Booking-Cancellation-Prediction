@@ -118,5 +118,3 @@ if st.button("Predict Cancellation"):
 
     except requests.exceptions.ConnectionError:
         st.error("FastAPI server is not running.")
-
-    st.error("FastAPI server is not running.")
